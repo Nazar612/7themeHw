@@ -126,3 +126,7 @@ button.delete:hover {
   background-color: #c82333;
 
 }
+
+.p {
+  pointer-events: none;
+}
