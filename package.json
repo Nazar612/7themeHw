@@ -7,8 +7,11 @@
     "start": "parcel",
     "build": "parcel build"
   },
-  "dependencies": {},
+  "dependencies": {
+    "handlebars": "^4.7.9"
+  },
   "devDependencies": {
-    "parcel": "^2.14.0"
+    "parcel": "^2.14.0",
+    "parcel-transformer-hbs": "^1.0.4"
   }
 }
