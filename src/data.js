@@ -25,20 +25,34 @@ const zakladki = {
     zaklButton: document.querySelector("#addBookmarkBtn"),
     zaklList: document.querySelector("#bookmarkList"),
 };
-zakladki.zaklList.innerHTML = template({products});
+// zakladki.zaklList.innerHTML = template({products});
 let index = 0;
+
+
+const massiveFzakl = JSON.parse(localStorage.getItem("key")) || [];
+function renderZakl(array) {
+ const markup = array.map(({id, url})=> {
+   return `<li class="bookMark_item" id="${id}">
+    <a href="${url}" class="bookMark_url">${url}</a>
+  </li>`
+  }).join(" ");
+
+  zakladki.zaklList.innerHTML = markup;
+}
+
+renderZakl(massiveFzakl);
 let zakladka = "zakladka" + index;
 
-// zakladki.zaklButton.addEventListener("click", (e)=> {
-//     let value = zakladki.zaklInp.value;
-//     if(value !== ""){
-//         index++;
-//         zakladka = "zakladka" + index;
-//         sessionStorage.setItem(zakladka ,value)
-//         console.log(        sessionStorage.setItem(zakladka ,value)
-// );
-//     }
-// })
+zakladki.zaklButton.addEventListener("click", (e)=> {
+    let value = zakladki.zaklInp.value;
+    const newZakl = {
+      url: value,
+      id: crypto.randomUUID(),
+    }
+    massiveFzakl.push(newZakl);
+    localStorage.setItem("key", JSON.stringify(massiveFzakl));
+    renderZakl(massiveFzakl)
+})
 
 zakladki.zaklList.addEventListener("click", (e)=>{
     if(!e.target.classList.contains("item")) {
